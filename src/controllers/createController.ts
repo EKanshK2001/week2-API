@@ -11,5 +11,5 @@ export const createOne = async (req:Request, res:Response) => {                 
         title, quote, disclaimer, content,
     })
 
-    res.json({msg : "saved successfully"})
+    res.status(200).json({msg : "saved successfully"})
 }

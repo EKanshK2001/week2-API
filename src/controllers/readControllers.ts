@@ -7,11 +7,12 @@ export const readAll = async (req: Request, res: Response) => {
 
     try {
         const pages = await PageModel.find({});
-        res.json(pages);
+        res.status(200).json(pages);
 
     }
     catch (error) {
         console.log(error);
+        res.status(500);
     }
 }
 
@@ -23,9 +24,10 @@ export const readOne = async (req: Request, res: Response) => {
     
     try {
         const page = await PageModel.findById(id);
-        res.json(page)
+        res.status(200).json(page)
     }
     catch (error) {
         console.log(error);
+        res.status(500);
     }
 }
