@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import PageModel from "../db";
+import PageModel from "../db/db";
 
 export const createOne = async (req:Request, res:Response) => {                    //create new page
     

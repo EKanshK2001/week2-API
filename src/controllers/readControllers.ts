@@ -1,8 +1,9 @@
-import { Request, Response } from "express"
-import  PageModel  from '../db'
+import { NextFunction, Request, Response } from "express"
+import  PageModel  from '../db/db'
+import { errorHandler } from "../utils/errorHandler";
 
 
-export const readAll = async (req: Request, res: Response) => {
+export const readAll = async (req: Request, res: Response, next:NextFunction) => {
     //needs to read the titles from all the existing pages in the database and send it
 
     try {
@@ -11,23 +12,27 @@ export const readAll = async (req: Request, res: Response) => {
 
     }
     catch (error) {
-        console.log(error);
-        res.status(500);
+        next(error);
     }
 }
 
 
-export const readOne = async (req: Request, res: Response) => {
+export const readOne = async (req: Request, res: Response, next:NextFunction) => {
     //needs to extract and send the whole page by taking the id param in the request
-    const id = req.params.id;
-    // console.log(id);
+    const pageId = req.params.id;
     
     try {
-        const page = await PageModel.findById(id);
+        const existingPage = await PageModel.findById(pageId);
+
+        if (!existingPage) {
+            // res.status(422).json({msg : "No existing page found by that pageId"})
+            return next(errorHandler("No existing page found by that pageId", 422));
+        }
+    
+        const page = await PageModel.findById(pageId);
         res.status(200).json(page)
     }
     catch (error) {
-        console.log(error);
-        res.status(500);
+        next(error);
     }
 }
