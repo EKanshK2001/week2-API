@@ -1,11 +1,12 @@
 
-# Mini Project for practicing API, Database integration (Typescript, Express, MongoDB, Mongoose).
+## Mini Project for practicing API, Database integration
+### (Typescript, Express, MongoDB, Mongoose)
 
 
-## Topics to cover :-
+### Topics to cover :-
 - API to perform JSON Object CRUD Operations with database
 
-## Routes :-
+### Routes :-
 - GET    /                     - to display all kinds of pages
 - GET    /read:{id}            - to display page with the specific id
 - POST   /create               - create new page
