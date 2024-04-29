@@ -1,32 +1,35 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema } from "mongoose";
 //db url
-import 'dotenv/config'
+import "dotenv/config";
 
-try {
+const connectDB = async () => {
+  try {
     //connect to db with url
-    mongoose.connect(process.env.mongoURL!).then(() => {console.log("database connnected.");
-    })
+    await mongoose.connect(process.env.mongoURL!).then(() => {
+      console.log("database connnected.");
+    });
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-} catch (error) {
-    console.log(error);  
-}
+connectDB();
 
 interface page extends Document {
-    title: string,
-    quote: string,
-    disclaimer: string,
-    content: string,
+  title: string;
+  quote: string;
+  disclaimer: string;
+  content: string;
 }
 
-const pageSchema:Schema = new mongoose.Schema<page> ({
-    title: {type: String},
-    quote: {type: String},
-    disclaimer: {type: String},
-    content: {type: String},
-})
+const pageSchema: Schema = new mongoose.Schema<page>({
+  title: { type: String },
+  quote: { type: String },
+  disclaimer: { type: String },
+  content: { type: String },
+});
 
-const PageModel = mongoose.model<page>('Page', pageSchema);
-
+const PageModel = mongoose.model<page>("Page", pageSchema);
 
 export default PageModel;
-

@@ -1,39 +1,26 @@
-import express, { Request, Response } from "express"
-const PORT = 3000;
-import  PageModel  from './db'
-//import page model
+import express from "express"
+import {readAll, readOne } from "./controllers/readControllers";
+import { createOne } from "./controllers/createController";
+import { updateOne } from "./controllers/updateController";
+import { deleteOne } from "./controllers/deleteController";
 
+
+const PORT = 3000;
 const app:express.Application = express()
 app.use(express.json())
 
-app.get('/', (req:Request, res:Response) => {                           //can use to display all kinds of pages (topics)
-    res.json({msg: "hi"})
-})
 
-app.get('/read', (req:Request, res:Response) => {                       //read any specific page (id as param?)
-    res.json({msg: "sup bitches"})
-})
+app.get('/', readAll);                                  //can use to display all kinds of pages (topics)
 
-app.post('/create', (req:Request, res:Response) => {                    //create new page
-    
-    const {title, quote, disclaimer, content} = req.body;
+app.get('/read', readOne);                              //read any specific page (id as param?)
 
-    // res.json({title, quote, disclaimer, content,})
-    //save to mongodb
-    PageModel.create({
-        title, quote, disclaimer, content,
-    })
+app.post('/create', createOne);                         //create new page
 
-    res.json({msg : "saved successfully"})
-})
+app.put('/update', updateOne)                           //update any specific page with thier id as param
 
-app.put('/update', (req:Request, res:Response) => {                     //update any specific page with thier id as param
-    
-})
+app.delete('/delete', deleteOne)                        //delete any specific page
 
-app.delete('/delete', (req:Request, res:Response) => {                  //delete any specific page
-    
-})
+
 
 app.listen(PORT, () => {
     console.log(`server running on link : http://localhost:${PORT}/` );
