@@ -18,7 +18,7 @@ export const readAll = async (req: Request, res: Response) => {
 
 export const readOne = async (req: Request, res: Response) => {
     //needs to extract and send the whole page by taking the id param in the request
-    const id = req.query.id;
+    const id = req.params.id;
     // console.log(id);
     
     try {
