@@ -21,7 +21,9 @@ export const readOne = async (req: Request, res: Response, next:NextFunction) =>
     //needs to extract and send the whole page by taking the id param in the request
     const pageId = req.params.id;
     
+    
     try {
+        // const existingPage = await PageModel.findOne({title: title});
         const existingPage = await PageModel.findById(pageId);
 
         if (!existingPage) {
