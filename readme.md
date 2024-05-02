@@ -4,7 +4,7 @@
 
 
 ### Topics to cover :-
-- API to perform JSON Object CRUD Operations with database
+- API to perform JSON Object CRUD Operations with database - ✅
 
 ### Routes :-
 - GET    /                     
